@@ -3,7 +3,7 @@ title: "penguin_assessment"
 output: pdf_document
 date: "2022-11-30"
 ---
-First, load the required r packages: ggplot2, tidyverse, janitor, dplyr, and palmerpenguins. Create a folder called penguins_project, where everything will be stored. Then manually set this as your working directory (Session, Set Working Directory, Choose Working Directory).
+First, load the required r packages: ggplot2, tidyverse, janitor, dplyr, and palmerpenguins. Create a folder called penguins_project, where everything will be stored. Then manually set this as your working directory (Session, Set Working Directory, Choose Working Directory). Download the cleaning.r functions from this repository and run them in a separate r file. 
 ```{r packages, include = FALSE}
 library(ggplot2)
 library(tidyverse)
