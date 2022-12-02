@@ -3,7 +3,8 @@ title: "penguin_assessment"
 output: pdf_document
 date: "2022-11-30"
 ---
-First, load the required r packages: ggplot2, tidyverse, janitor, dplyr, and palmerpenguins. Create a folder called penguins_project, where everything will be stored. Then manually set this as your working directory (Session, Set Working Directory, Choose Working Directory). Download the cleaning.r functions from this repository and run them in a separate r file. 
+Open this code in an R markdown file. 
+First, load the required r packages: ggplot2, tidyverse, janitor, dplyr, and palmerpenguins. Create a folder on your computer called penguins_project, where everything will be stored. Then manually set this as your working directory (Session, Set Working Directory, Choose Working Directory). Download the cleaning.r functions from this repository and run them in a separate r file. 
 ```{r packages, include = FALSE}
 library(ggplot2)
 library(tidyverse)
@@ -17,12 +18,12 @@ Create a folder within penguins_project called "data_raw". Preserve a copy of th
 write.csv(penguins_raw, "data_raw/penguins_raw.csv")
 ```
 
-Clean the dataset to make it easier to work with. The functions are stored in the "functions" folder, in the file "cleaning.r". 
+Clean the dataset to make it easier to work with. The functions are stored in the file "cleaning.r". 
 ```{r clean, include = FALSE}
 penguins_clean <- cleaning(penguins_raw)
 ```
 
-Create a csv folder with the clean data. 
+Make a folder called data_clean within the penguins_project folder. Create a csv file with the clean data and store it in this folder. 
 ```{r csv, include = FALSE}
 write.csv(penguins_clean, "data_clean/penguins_clean.csv")
 ```
@@ -31,8 +32,26 @@ Create a new dataset called penguins_fully_clean, where the NA values are remove
 ```{r clean, include = FALSE}
 penguins_fully_clean <- remove_empty(penguins_clean)
 ```
-
 Run a linear model for penguin body mass and flipper length, using the penguins_fully_clean dataset.
 ```{r linear, echo = FALSE}
 lm(body_mass_g ~ flipper_length_mm, penguins_fully_clean) 
 ```
+
+Plot the linear model on a scatter graph.
+```{r plot, echo = FALSE}
+plot1 <- ggplot(penguins_fully_clean, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "Red", fill = "Blue") +
+  theme(panel.border = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
+```
+
+Create a folder called "results" within the "penguins_project" folder. Save the plot generated above to this folder. 
+```{r plot, echo = FALSE}
+ggsave(filename = "results/plot.png",
+       plot = plot1,
+       height = 10.5, width = 14.8, 
+       units = "cm")
+```
+
